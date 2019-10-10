@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    count: 0,
     user: { id: 'abc123', name: 'Adam Jahr' },
     categories: [
       'sustainibility',
@@ -22,8 +23,18 @@ export default new Vuex.Store({
       { id: 4, text: '...', done: false }
     ]
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    INCREMENT_COUNT(state, value) {
+      state.count += value
+    }
+  },
+  actions: {
+    updateCount({ state, commit }, incrementBy) {
+      if (state.user) {
+        commit('INCREMENT_COUNT', incrementBy)
+      }
+    }
+  },
   getters: {
     catLength: state => {
       return state.categories.length

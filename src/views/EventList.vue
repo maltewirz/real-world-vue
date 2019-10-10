@@ -8,6 +8,7 @@
 <script>
 import EventCard from '@/components/EventCard.vue'
 import EventService from '@/services/EventService.js'
+import { mapState } from 'vuex'
 
 export default {
   components: {
