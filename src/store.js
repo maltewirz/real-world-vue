@@ -7,6 +7,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     events: [],
+    eventsTotal: 0,
     user: { id: 'abc123', name: 'Adam Jahr' },
     categories: [
       'sustainibility',
@@ -16,17 +17,17 @@ export default new Vuex.Store({
       'education',
       'food',
       'community'
-    ],
-    todos: [
-      { id: 1, text: '...', done: true },
-      { id: 2, text: '...', done: false },
-      { id: 3, text: '...', done: true },
-      { id: 4, text: '...', done: false }
     ]
   },
   mutations: {
     ADD_EVENT(state, event) {
       state.events.push(event)
+    },
+    SET_EVENTS(state, events) {
+      state.events = events
+    },
+    SET_TOTAL_EVENTS(state, total) {
+      state.eventsTotal = total
     }
   },
   actions: {
@@ -34,6 +35,16 @@ export default new Vuex.Store({
       return EventService.postEvent(event).then(() => {
         commit('ADD_EVENT', event)
       })
+    },
+    fetchEvents({ commit }, { perPage, page }) {
+      EventService.getEvents(perPage, page)
+        .then(response => {
+          commit('SET_TOTAL_EVENTS', response.headers['x-total-count'])
+          commit('SET_EVENTS', response.data)
+        })
+        .catch(error => {
+          console.log('There was an error: ', error.response)
+        })
     }
   },
   getters: {}
