@@ -6,6 +6,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    event: {},
     events: [],
     eventsTotal: 0,
     user: { id: 'abc123', name: 'Adam Jahr' },
@@ -20,6 +21,9 @@ export default new Vuex.Store({
     ]
   },
   mutations: {
+    SET_EVENT(state, event) {
+      state.event = event
+    },
     ADD_EVENT(state, event) {
       state.events.push(event)
     },
@@ -31,6 +35,20 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    fetchEvent({ commit, getters }, id) {
+      let event = getters.getEventById(id)
+      if (event) {
+        commit('SET_EVENT', event)
+      } else {
+        EventService.getEvent(id)
+          .then(response => {
+            commit('SET_EVENT', response.data)
+          })
+          .catch(error => {
+            console.log('There was an error:', error.response)
+          })
+      }
+    },
     createEvent({ commit }, event) {
       return EventService.postEvent(event).then(() => {
         commit('ADD_EVENT', event)
@@ -47,5 +65,9 @@ export default new Vuex.Store({
         })
     }
   },
-  getters: {}
+  getters: {
+    getEventById: state => id => {
+      return state.events.find(event => event.id === id)
+    }
+  }
 })
