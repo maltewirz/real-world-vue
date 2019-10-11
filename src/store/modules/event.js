@@ -1,26 +1,16 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+/* eslint-disable prettier/prettier */
 import EventService from '@/services/EventService.js'
 
-Vue.use(Vuex)
+export const namespaced = true
 
-export default new Vuex.Store({
-  state: {
+export const state = {
     event: {},
     events: [],
     eventsTotal: 0,
-    user: { id: 'abc123', name: 'Adam Jahr' },
-    categories: [
-      'sustainibility',
-      'nature',
-      'animal welfare',
-      'housing',
-      'education',
-      'food',
-      'community'
-    ]
-  },
-  mutations: {
+    user: { id: 'abc123', name: 'Adam Jahr' }
+}
+
+export const mutations = {
     SET_EVENT(state, event) {
       state.event = event
     },
@@ -33,41 +23,43 @@ export default new Vuex.Store({
     SET_TOTAL_EVENTS(state, total) {
       state.eventsTotal = total
     }
-  },
-  actions: {
+}
+
+
+export const  actions = {
     fetchEvent({ commit, getters }, id) {
-      let event = getters.getEventById(id)
-      if (event) {
+        let event = getters.getEventById(id)
+        if (event) {
         commit('SET_EVENT', event)
-      } else {
+        } else {
         EventService.getEvent(id)
-          .then(response => {
+            .then(response => {
             commit('SET_EVENT', response.data)
-          })
-          .catch(error => {
+            })
+            .catch(error => {
             console.log('There was an error:', error.response)
-          })
-      }
+            })
+        }
     },
     createEvent({ commit }, event) {
-      return EventService.postEvent(event).then(() => {
-        commit('ADD_EVENT', event)
-      })
+        return EventService.postEvent(event).then(() => {
+            commit('ADD_EVENT', event)
+        })
     },
     fetchEvents({ commit }, { perPage, page }) {
-      EventService.getEvents(perPage, page)
+        EventService.getEvents(perPage, page)
         .then(response => {
-          commit('SET_TOTAL_EVENTS', response.headers['x-total-count'])
-          commit('SET_EVENTS', response.data)
+            commit('SET_TOTAL_EVENTS', response.headers['x-total-count'])
+            commit('SET_EVENTS', response.data)
         })
         .catch(error => {
-          console.log('There was an error: ', error.response)
+            console.log('There was an error: ', error.response)
         })
     }
-  },
-  getters: {
+}
+
+export const getters = {
     getEventById: state => id => {
       return state.events.find(event => event.id === id)
     }
-  }
-})
+}

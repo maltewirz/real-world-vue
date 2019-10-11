@@ -239,6 +239,20 @@
       "date": "2019-10-05T08:36:00.000Z",
       "time": "2:00",
       "attendees": []
+    },
+    {
+      "id": 7581064,
+      "category": "animal welfare",
+      "organizer": {
+        "id": "abc123",
+        "name": "Mike"
+      },
+      "title": "sdc",
+      "description": "sdv",
+      "location": "sdv",
+      "date": "2019-10-11T10:07:00.000Z",
+      "time": "3:00",
+      "attendees": []
     }
   ]
 }
