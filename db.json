@@ -253,6 +253,20 @@
       "date": "2019-10-11T10:07:00.000Z",
       "time": "3:00",
       "attendees": []
+    },
+    {
+      "id": 3973612,
+      "category": "housing",
+      "organizer": {
+        "id": "abc123",
+        "name": "Mike"
+      },
+      "title": "dv",
+      "description": "dvs",
+      "location": "vd",
+      "date": "2019-10-01T09:37:00.000Z",
+      "time": "3:00",
+      "attendees": []
     }
   ]
 }
