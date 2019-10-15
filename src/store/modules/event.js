@@ -27,7 +27,7 @@ export const mutations = {
 
 
 export const  actions = {
-    fetchEvent({ commit, getters, dispatch }, id) {
+    fetchEvent({ commit, getters }, id) {
         let event = getters.getEventById(id)
         if (event) {
             commit('SET_EVENT', event)
@@ -37,13 +37,6 @@ export const  actions = {
                 .then(response => {
                     commit('SET_EVENT', response.data)
                     return response.data
-                })
-                .catch(error => {
-                    const notification = {
-                        type: 'error',
-                        message: 'There was a problem fetching an event: ' + error.message
-                    }
-                    dispatch('notification/add', notification, { root: true})
                 })
         }
     },
