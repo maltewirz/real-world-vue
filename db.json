@@ -267,6 +267,20 @@
       "date": "2019-10-01T09:37:00.000Z",
       "time": "3:00",
       "attendees": []
+    },
+    {
+      "id": 2344474,
+      "category": "housing",
+      "organizer": {
+        "id": "abc123",
+        "name": "Mike"
+      },
+      "title": "sdv",
+      "description": "sdv",
+      "location": "sdv",
+      "date": "2019-10-02T06:05:00.000Z",
+      "time": "2:00",
+      "attendees": []
     }
   ]
 }
