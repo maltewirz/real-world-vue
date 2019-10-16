@@ -5,6 +5,7 @@
         v-model="event.category"
         label="Select a category"
         :options="categories"
+        class="field"
       />
       <h3>Name & describe your event</h3>
       <BaseInput 
@@ -12,32 +13,35 @@
         v-model="event.title"  
         type="text" 
         placeholder="Add an event title"
+        class="field"
       />
       <BaseInput 
         label="Description"
-        v-model="event.description"  
-        type="text" 
+        v-model="event.description"
+        type="text"
         placeholder="Add a description"
+        class="field"
       />
       <h3>Where is your event?</h3>
       <BaseInput 
         label="Location"
-        v-model="event.location"  
-        type="text" 
+        v-model="event.location"
+        type="text"
         placeholder="Add a location"
+        class="field"
       />
       <h3>When is your event?</h3>
       <div class="field">
         <label>Date</label>
         <datepicker v-model="event.date" placeholder="Select a date"/>
       </div>
-      <div class="field">
-        <label>Select a time</label>
-        <select v-model="event.time">
-          <option v-for="time in times" :key="time">{{ time }}</option>
-        </select>
-      </div>
-      <input type="submit" class="button -fill-gradient" value="Submit"/>
+      <BaseSelect 
+        v-model="event.time"
+        label="Select a time"
+        :options="times"
+        class="field"
+      />
+      <BaseButton type="submit" buttonClass="-fill-gradient" disabled>Submit</BaseButton>
       </form>
   </div>
  
