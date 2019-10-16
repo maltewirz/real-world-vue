@@ -281,6 +281,34 @@
       "date": "2019-10-02T06:05:00.000Z",
       "time": "2:00",
       "attendees": []
+    },
+    {
+      "id": 3242200,
+      "category": "animal welfare",
+      "organizer": {
+        "id": "abc123",
+        "name": "Mike"
+      },
+      "title": "dfasb",
+      "description": "dsbf",
+      "location": "dfb",
+      "date": "2019-10-02T05:14:00.000Z",
+      "time": "",
+      "attendees": []
+    },
+    {
+      "id": 515890,
+      "category": "housing",
+      "organizer": {
+        "id": "abc123",
+        "name": "Mike"
+      },
+      "title": "gbdb",
+      "description": "dfb",
+      "location": "dfb",
+      "date": "2019-10-03T05:46:00.000Z",
+      "time": "3:00",
+      "attendees": []
     }
   ]
 }
