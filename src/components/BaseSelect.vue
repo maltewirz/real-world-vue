@@ -3,9 +3,9 @@
         <label v-if="label">{{ label }}</label>
         <select 
             :value="value" 
-            v-on="$listeners"
-            @change="updateValue" 
-            v-bind="$attrs">
+            v-bind="$attrs"
+            v-on="listeners"
+            >
             <option 
                 v-for="option in options"
                 :selected="option === value"
@@ -30,6 +30,14 @@ export default {
     methods: {
         updateValue(event) {
             this.$emit('input', event.target.value)
+        }
+    },
+    computed: {
+        listeners() {
+            return {
+                ...this.$listeners,
+                input: this.updateValue
+            }
         }
     }
 }

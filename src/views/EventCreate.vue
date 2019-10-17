@@ -66,10 +66,15 @@
       <template v-if="$v.event.time.$error">
         <p v-if="!$v.event.time.required" class="errorMessage">Time is required</p>
       </template>
-      <BaseButton type="submit" buttonClass="-fill-gradient" >Submit</BaseButton>
-      </form>
+      <BaseButton 
+        type="submit" 
+        buttonClass="-fill-gradient"
+        :disabled="$v.$anyError"
+         >Submit
+      </BaseButton>
+      <p v-if="$v.$anyError" class="errorMessage">Please fill out the required field(s).</p>
+    </form>
   </div>
- 
 </template>
 
 <script>
@@ -103,19 +108,22 @@ export default {
   },
   methods: {
     createEvent() {
-      NProgress.start()
-      this.$store
-        .dispatch('event/createEvent', this.event)
-        .then(() => {
-          this.$router.push({
-            name: 'event-show',
-            params: { id: this.event.id}
+      this.$v.$touch() //touching all fields to turn them "dirty"
+      if (!this.$v.$invalid) {
+        NProgress.start()
+        this.$store
+          .dispatch('event/createEvent', this.event)
+          .then(() => {
+            this.$router.push({
+              name: 'event-show',
+              params: { id: this.event.id}
+            })
+            this.event = this.createFreshEvent()
           })
-          this.event = this.createFreshEvent()
-        })
-        .catch(() => {
-          NProgress.done()
-        })
+          .catch(() => {
+            NProgress.done()
+          })
+      }
     },
     createFreshEvent() {
       const user = this.$store.state.user.user
