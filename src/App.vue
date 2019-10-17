@@ -242,4 +242,10 @@ select:focus::ms-value {
 select::ms-expand {
   opacity: 0;
 }
+.errorMessage {
+  color: red
+}
+.error {
+  border: 1px solid red
+}
 </style>

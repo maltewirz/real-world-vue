@@ -3,8 +3,8 @@
         <label v-if="label">{{ label }}</label>
         <input 
             :value="value" 
-            @input="updateValue" 
             v-bind="$attrs"
+            v-on="listeners"
         />
     </div>
 </template>
@@ -18,6 +18,14 @@ export default {
     methods: {
         updateValue(event) {
             this.$emit('input', event.target.value)
+        }
+    },
+    computed: {
+        listeners() {
+            return {
+                ...this.$listeners,
+                input: this.updateValue
+            }
         }
     }
 }
